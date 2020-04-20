@@ -1,4 +1,4 @@
-package id.knt.digimate.modles
+package id.knt.digimate.models
 
 import java.util.UUID
 import javax.persistence.Id
