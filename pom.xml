@@ -53,6 +53,14 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
+<<<<<<< HEAD
+=======
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+>>>>>>> Create model article, media and user
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
@@ -83,6 +91,10 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+<<<<<<< HEAD
+=======
+
+>>>>>>> Create model article, media and user
 			<plugin>
 				<groupId>org.jetbrains.kotlin</groupId>
 				<artifactId>kotlin-maven-plugin</artifactId>
@@ -108,6 +120,37 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+<<<<<<< HEAD
+=======
+
+			<plugin>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-maven-plugin</artifactId>
+            <version>${kotlin.version}</version>
+            <executions>
+                <execution>
+                    <id>compile</id>
+                    <phase>compile</phase>
+                    <goals>
+                        <goal>compile</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <compilerPlugins>
+                    <plugin>kotlinx-serialization</plugin>
+                </compilerPlugins>
+            </configuration>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-maven-serialization</artifactId>
+                    <version>${kotlin.version}</version>
+                </dependency>
+            </dependencies>
+		  </plugin>
+		  
+>>>>>>> Create model article, media and user
 		</plugins>
 	</build>
 
