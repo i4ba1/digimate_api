@@ -7,8 +7,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc
 
 @EnableWebMvc
 @SpringBootApplication
-class DigimateApplication
+open class DigimateApplication {
 
-fun main(args: Array<String>) {
-	runApplication<DigimateApplication>(*args)
+	fun main(args: Array<String>) {
+		runApplication<DigimateApplication>(*args)
+	}
 }

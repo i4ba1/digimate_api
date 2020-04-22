@@ -13,7 +13,7 @@ import javax.persistence.Table
 import javax.persistence.Temporal
 import javax.persistence.TemporalType
 import org.hibernate.annotations.GenericGenerator
-import id.knt.digimate.User
+import id.knt.digimate.models.User
 
 
 
@@ -24,7 +24,6 @@ import id.knt.digimate.User
 @Entity(name = "RunningText")
 @Table(name = "running_text")
 data class RunningText (
-
 
 	@Id
 	@GeneratedValue(generator = "UUID")

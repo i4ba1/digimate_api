@@ -51,9 +51,9 @@ data class Media (
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	val createdAt: LocalDateTime,
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
-	val udpatedAt: LocalDateTime,
+	val updatedAt: LocalDateTime,
 	
 	@Column(name = "is_published", columnDefinition = "boolean", nullable = false)
 	val isPublished: Boolean = false,

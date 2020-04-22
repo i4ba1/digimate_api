@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.data.mysql.database",
+      "type": "java.lang.String",
+      "description": "Description for spring.data.mysql.database."
+  }
+] }
