@@ -1,6 +1,5 @@
 package id.knt.digimate.models
 
-import java.util.UUID
 import javax.persistence.Id
 import javax.persistence.GeneratedValue
 import org.hibernate.annotations.GenericGenerator
@@ -11,13 +10,15 @@ import java.time.LocalDateTime
 import javax.persistence.ManyToOne
 import javax.persistence.JoinColumn
 import id.knt.digimate.models.User
+import java.sql.Timestamp
+import java.util.*
 import javax.persistence.Entity
 import javax.persistence.Table
 
 @Entity(name = "Article")
 @Table(name = "article")
-data class Article(
-	
+data class Article (
+
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(
@@ -25,30 +26,30 @@ data class Article(
 			strategy = "org.hibernate.id.UUIDGenerator"
    )
    @Column(name = "id", updatable = false, nullable = false)
-	val id: UUID,
-   
+	val id: UUID? = null,
+
    @Column(name = "title", columnDefinition = "varchar(100)")
-	val title: String,
-	
+	val title: String = "",
+
 	@Column(name = "content", columnDefinition = "text")
-	val content: String,
-	
+	val content: String = "",
+
 	@Temporal(TemporalType.TIMESTAMP)
-	val createdAt: LocalDateTime,
-	
+	val createdAt: Date? = null,
+
 	@Temporal(TemporalType.TIMESTAMP)
-	val udpatedAt: LocalDateTime,
+	val updatedAt: Date? = null,
 
 	@Column(name = "location_name", columnDefinition = "varchar(150)")
-	val locationName:String,
+	val locationName:String = "",
 
 	@Column(name = "location_map", columnDefinition = "text")
-	val locationMap: String,
-	
+	val locationMap: String = "",
+
 	@Column(name = "is_published", columnDefinition = "boolean", nullable = false)
 	val isPublished: Boolean = false,
-	
+
 	@ManyToOne()
 	@JoinColumn(name="user_id", nullable = false)
-	val user: User
+	val user: User? = null
 )

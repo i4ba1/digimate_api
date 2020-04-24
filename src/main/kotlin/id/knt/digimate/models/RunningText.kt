@@ -14,7 +14,8 @@ import javax.persistence.Temporal
 import javax.persistence.TemporalType
 import org.hibernate.annotations.GenericGenerator
 import id.knt.digimate.models.User
-
+import java.sql.Timestamp
+import java.util.*
 
 
 /**
@@ -32,25 +33,25 @@ data class RunningText (
 				strategy = "org.hibernate.id.UUIDGenerator"
 			)
 	@Column(name = "id", updatable = false, nullable = false)
-	val id:String,
+	val id: UUID? = null,
 	
 	@Column(name = "title", columnDefinition = "varchar(100)")
-	val title: String,
+	val title: String = "",
 	
 	@Column(name = "content", columnDefinition = "text")
-	val content: String,
+	val content: String = "",
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	val createdAt: LocalDateTime,
+	val createdAt: Date? = null,
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	val udpatedAt: LocalDateTime,
+	val updatedAt: Date? = null,
 	
 	@Column(name = "is_published", columnDefinition = "boolean", nullable = false)
 	val isPublished:Boolean = false,
 	
 	@ManyToOne()
 	@JoinColumn(name="user_id", nullable = false)
-	val user: User
+	val user: User? =null
 
 )
