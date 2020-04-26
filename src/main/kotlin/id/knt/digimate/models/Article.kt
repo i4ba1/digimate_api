@@ -26,30 +26,30 @@ data class Article (
 			strategy = "org.hibernate.id.UUIDGenerator"
    )
    @Column(name = "id", updatable = false, nullable = false)
-	val id: UUID? = null,
+	var id: UUID? = null,
 
    @Column(name = "title", columnDefinition = "varchar(100)")
-	val title: String = "",
+	var title: String = "",
 
 	@Column(name = "content", columnDefinition = "text")
-	val content: String = "",
+	var content: String = "",
 
 	@Temporal(TemporalType.TIMESTAMP)
-	val createdAt: Date? = null,
+	var createdAt: Date? = null,
 
 	@Temporal(TemporalType.TIMESTAMP)
-	val updatedAt: Date? = null,
+	var updatedAt: Date? = null,
 
 	@Column(name = "location_name", columnDefinition = "varchar(150)")
-	val locationName:String = "",
+	var locationName:String = "",
 
 	@Column(name = "location_map", columnDefinition = "text")
-	val locationMap: String = "",
+	var locationMap: String = "",
 
 	@Column(name = "is_published", columnDefinition = "boolean", nullable = false)
-	val isPublished: Boolean = false,
+	var isPublished: Boolean = false,
 
 	@ManyToOne()
 	@JoinColumn(name="user_id", nullable = false)
-	val user: User? = null
+	var user: User? = null
 )

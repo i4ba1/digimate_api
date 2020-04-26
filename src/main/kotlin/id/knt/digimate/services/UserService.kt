@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile
 class UserService private constructor(private var userRepository: IUserRepository) : IUserService {
 
 	override fun save(newUser: UserDto): Int{
-		
+
 		return 1
 	}
 
