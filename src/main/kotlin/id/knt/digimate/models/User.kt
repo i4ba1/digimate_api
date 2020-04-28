@@ -60,6 +60,9 @@ data class User(
 		@Column(name = "picture_file_content_type", columnDefinition = "char(100)", nullable = false)
 		var pictureFileContentType: String = "",
 
+		@Column(name = "profile_picture_url", columnDefinition = "text", nullable = false)
+		var profilePictureUrl: String = "",
+
 		@Column(name = "user_type", columnDefinition = "char(25)", nullable = false)
 		var userType: String = "",
 

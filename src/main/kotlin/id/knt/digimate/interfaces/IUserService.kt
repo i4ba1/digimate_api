@@ -5,8 +5,8 @@ import id.knt.digimate.models.User
 
 interface IUserService {
 	fun save(newUser: UserDto): Int
-	fun findUserById(id: String): User
-	fun findAllUser(): List<User>
+	fun findUserById(id: String): UserDto?
+	fun findAllUser(): List<UserDto>?
 	fun update(currentUser: UserDto): Int
-	fun delete(id: String): Int
+	fun delete(userDto: UserDto): Int
 }

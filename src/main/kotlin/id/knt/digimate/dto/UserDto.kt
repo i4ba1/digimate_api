@@ -3,17 +3,18 @@ package id.knt.digimate.dto
 import org.springframework.web.multipart.MultipartFile
 
 data class UserDto(
-	val id: String,
-	val firstName: String,
-	val lastName: String,
-	val fullName: String,
-	val email: String,
-	val homePhone: String,
-	val mobilePhone: String,
-	val address: String,
-	val identityNumber: String,
-	val username: String,
-	val password: String,
-	val userType: String,
-	val profilePicture: MultipartFile
+	var id: String,
+	var firstName: String,
+	var lastName: String,
+	var fullName: String,
+	var email: String,
+	var homePhone: String,
+	var mobilePhone: String,
+	var address: String,
+	var identityNumber: String,
+	var username: String,
+	var password: String,
+	var userType: String,
+	var profilePicture: MultipartFile?,
+	var profilePictureUrl: String
 )
