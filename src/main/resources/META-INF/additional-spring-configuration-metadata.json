@@ -4,5 +4,15 @@
       "name": "spring.data.mysql.database",
       "type": "java.lang.String",
       "description": "Description for spring.data.mysql.database."
-  }
-] }
+    },
+    {
+      "name": "digimate.article",
+      "type": "java.lang.String",
+      "description": "Description for digimate.article."
+    },
+    {
+      "name": "digimate.profile",
+      "type": "java.lang.String",
+      "description": "Description for digimate.profile."
+    }
+  ] }

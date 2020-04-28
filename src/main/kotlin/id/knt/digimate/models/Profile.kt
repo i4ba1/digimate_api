@@ -11,24 +11,27 @@ import javax.persistence.Lob
 
 @Entity(name = "Profile")
 @Table(name = "profile")
-data class Profile (
-	
-	@Id
-	@GeneratedValue(generator = "UUID")
-	@GenericGenerator(
-		name = "UUID",
-		strategy = "org.hibernate.id.UUIDGenerator"
-	)
-	val id: UUID? = null,
+data class Profile(
 
-	@Column(name = "province_name", columnDefinition = "varchar(100)", nullable = false)
-	val provinceName: String = "",
-	
-	@Column(name = "address", columnDefinition = "varchar(150)", nullable = false)
-	val address: String = "",
-	
-	@Lob
-	val logo: ByteArray? = null
+				@Id
+				@GeneratedValue(generator = "UUID")
+				@GenericGenerator(
+								name = "UUID",
+								strategy = "org.hibernate.id.UUIDGenerator"
+				)
+				var id: UUID? = null,
+
+				@Column(name = "province_name", columnDefinition = "varchar(100)", nullable = false)
+				var provinceName: String = "",
+
+				@Column(name = "address", columnDefinition = "varchar(150)", nullable = false)
+				var address: String = "",
+
+				@Lob
+				var logo: ByteArray? = null,
+
+				@Column(name = "logo_url", columnDefinition = "text", nullable = false)
+				var logoUrl: String = ""
 ) {
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
@@ -38,7 +41,7 @@ data class Profile (
 
 		if (logo != null) {
 			if (other.logo == null) return false
-			if (!logo.contentEquals(other.logo)) return false
+			if (!logo!!.contentEquals(other.logo!!)) return false
 		} else if (other.logo != null) return false
 
 		return true

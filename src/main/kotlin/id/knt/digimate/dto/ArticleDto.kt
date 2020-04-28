@@ -7,5 +7,5 @@ data class ArticleDto (
 	val locationName: String,
 	val locationMap: String,
 	val isPublished: Boolean,
-	val userId: Boolean
+	val userId: String
 )

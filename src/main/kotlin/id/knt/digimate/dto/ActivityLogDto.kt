@@ -1,15 +1,13 @@
 package id.knt.digimate.dto
 
-import id.knt.digimate.models.Article
-import id.knt.digimate.models.Media
-import id.knt.digimate.models.RunningText
-import id.knt.digimate.models.User
+import id.knt.digimate.models.*
+import java.lang.Exception
 
 data class ActivityLogDto(
-	val user: User,
-	val media: Media,
-	val article: Article,
-	val runningText: RunningText,
-	val activity: String,
-	val log: String
+	var user: User?,
+	var media: Media?,
+	var article: Article?,
+	var runningText: RunningText?,
+	var activity: String?,
+	var errorLog: Exception?
 )

@@ -16,30 +16,30 @@ data class ActivityLog (
 								strategy = "org.hibernate.id.UUIDGenerator"
 				)
 				@Column(name = "id", updatable = false, nullable = false)
-				val id: UUID? = null,
+				var id: UUID? = null,
 
 				@ManyToOne
 				@JoinColumn(name = "user_id", nullable = false)
-				val user: User? = null,
+				var user: User? = null,
 
 				@ManyToOne
 				@JoinColumn(name = "media_id", nullable = false)
-				val media: Media? = null,
+				var media: Media? = null,
 
 				@ManyToOne
 				@JoinColumn(name = "article_id", nullable = false)
-				val article: Article? = null,
+				var article: Article? = null,
 
 				@ManyToOne
 				@JoinColumn(name = "running_text_id", nullable = false)
-				val runningText: RunningText? = null,
+				var runningText: RunningText? = null,
 
 				@Temporal(TemporalType.TIMESTAMP)
-				val activityDate: Date? = null,
+				var activityDate: Date? = null,
 
 				@Column(name = "activity", columnDefinition = "char(50)")
-				val activity: String = "",
+				var activity: String? = "",
 
 				@Column(name = "log", columnDefinition = "text")
-				val log: String? = ""
+				var errorLog: Exception? = null
 )
