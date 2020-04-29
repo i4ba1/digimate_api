@@ -23,7 +23,7 @@ class ProfileService(private val profileRepository:IProfileRepository,
 	private var userHome = System.getProperty("user.home")
 
 	override fun save(profile:ProfileDto): Profile? {
-		val user = userService.findUserById(profile.userId)
+		val user = userService.getUser(profile.userId)
 		val file = profile.imageLog
 		val fileName = file.originalFilename?.let { StringUtils.cleanPath(it) }
 		val path = Paths.get(userHome + File.pathSeparator+ DIGIMATE_PROFILE + File.pathSeparator+fileName)
@@ -62,7 +62,7 @@ class ProfileService(private val profileRepository:IProfileRepository,
 
 	override fun update(profileDto: ProfileDto): Profile? {
 		var profile: Profile? = null
-		val user = userService.findUserById(profileDto.userId)
+		val user = userService.getUser(profileDto.userId)
 
 		try {
 			profile = profileRepository.findById(profileDto.id.toString()).get()

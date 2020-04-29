@@ -1,4 +1,4 @@
-package id.knt.digimate
+package id.knt.digimate.controller
 
 import id.knt.digimate.dto.UserDto
 import id.knt.digimate.services.UserService

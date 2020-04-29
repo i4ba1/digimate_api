@@ -18,7 +18,7 @@ class ArticleService (
 				IArticleService {
 
 	override fun save(article: ArticleDto): Article? {
-		val user = userService.findUserById(article.userId)
+		val user = userService.getUser(article.userId)
 
 		var newArticle: Article? = null
 		try {
@@ -55,7 +55,7 @@ class ArticleService (
 
 	override fun update(article: ArticleDto) {
 		val currentArticle = findArticleById(article.id)
-		val user = userService.findUserById(article.userId)
+		val user = userService.getUser(article.userId)
 
 		try {
 			if (currentArticle != null) {
@@ -77,7 +77,7 @@ class ArticleService (
 	}
 
 	override fun delete(articleDto: ArticleDto) {
-		val user = userService.findUserById(articleDto.userId)
+		val user = userService.getUser(articleDto.userId)
 		var currentArticle: Article? = null
 
 		try {

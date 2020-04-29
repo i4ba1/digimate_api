@@ -88,6 +88,10 @@ class UserService private constructor(
 		return null
 	}
 
+	override fun getUser(id: String): User? {
+		return userRepository.findByIdOrNull(id)
+	}
+
 	override fun findAllUser(): List<UserDto>? {
 		val allUsers: List<User> = userRepository.findAll(Sort.by("fullName").ascending())
 		val users = mutableListOf<UserDto>()

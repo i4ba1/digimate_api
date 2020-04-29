@@ -14,14 +14,14 @@ class RunningTextService(private val runningTextRepository: IRunningRepository, 
 				IRunningText {
 
 	override fun save(newRunningText: RunningTextDto): RunningText {
-		val currentUser: User = userService.findUserById(newRunningText.userId)
+		val currentUser: User? = userService.getUser(newRunningText.userId)
 		val createdDate = Date()
 		val runningText = RunningText(null, newRunningText.title, newRunningText.content, createdDate, null,
 						newRunningText.isPublished, currentUser)
 		return runningTextRepository.save(runningText)
 	}
 
-	override fun findRunningTextById(id: String): RunningText {
+	override fun findRunningTextById(id: String): RunningText? {
 		val optional: Optional<RunningText> = runningTextRepository.findById(id)
 		if (optional.isPresent) {
 			return optional.get()
@@ -29,11 +29,11 @@ class RunningTextService(private val runningTextRepository: IRunningRepository, 
 		return optional.get()
 	}
 
-	override fun findRunningTextByUserId(userId: String): List<RunningText> {
+	override fun findRunningTextByUserId(userId: String): List<RunningText>? {
 		return runningTextRepository.findRunningTextByUserId(userId)
 	}
 
-	override fun findAllRunningText(): List<RunningText> {
+	override fun findAllRunningText(): List<RunningText>? {
 		return runningTextRepository.findAll(Sort.by("createdAt").descending())
 	}
 
@@ -49,12 +49,19 @@ class RunningTextService(private val runningTextRepository: IRunningRepository, 
 		return null
 	}
 
-	override fun delete(id: String): Int {
-		if (runningTextRepository.findById(id).isPresent) {
-			runningTextRepository.deleteById(id)
-			return 0
+	override fun publishOrUnPublish(id: String, isPublish: Boolean): Boolean {
+		val optional = runningTextRepository.findById(id)
+		var runningText: RunningText? = null
+		if (optional.isPresent) {
+			runningText = optional.get()
+			runningText.isPublished = isPublish
+			runningTextRepository.saveAndFlush(runningText)
 		}
-		return 1
+
+		if (runningText != null) {
+			return runningText.isPublished
+		}
+		return false
 	}
 
 }

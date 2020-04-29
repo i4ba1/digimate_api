@@ -1,12 +1,15 @@
 package id.knt.digimate.dto
 
+import org.springframework.web.multipart.MultipartFile
+
 data class MediaDto(
-   val id: String,
-	val title: String,
-	val description: String,
-	val mediaFile: String,
-	val videoUrl: String,
-	val isPublished: Boolean = false,
-	val userId: String,
-	val type: String
+		var id: String,
+		var title: String,
+		var description: String,
+		var mediaFile: MultipartFile?,
+		var youtubeUrl: String,
+		var fileUrl: String,
+		var isPublished: Boolean = false,
+		var userId: String,
+		var type: String
 )
