@@ -48,7 +48,7 @@ class ArticleController(private val articleService: ArticleService) {
 
 	private fun responseForListAllArticleAndUserArticle(articles: List<Article>?): ResponseEntity<List<Article>>? {
 		return if (articles == null || articles.isEmpty()) {
-			ResponseEntity(articles, HttpStatus.OK)
+			ResponseEntity(HttpStatus.OK)
 		} else ResponseEntity(HttpStatus.NOT_FOUND)
 	}
 }

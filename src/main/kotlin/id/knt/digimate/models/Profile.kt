@@ -21,6 +21,12 @@ data class Profile(
 		)
 		var id: UUID? = null,
 
+		@Column(name = "description", columnDefinition = "varchar(100)", nullable = false)
+		var title: String = "",
+
+		@Column(name = "description", columnDefinition = "varchar(255)", nullable = false)
+		var description: String = "",
+
 		@Column(name = "province_name", columnDefinition = "varchar(100)", nullable = false)
 		var provinceName: String = "",
 
