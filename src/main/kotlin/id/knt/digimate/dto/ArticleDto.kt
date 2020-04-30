@@ -1,11 +1,12 @@
 package id.knt.digimate.dto
 
 data class ArticleDto (
-	val id: String,
-	val title: String,
-	val content: String,
-	val locationName: String,
-	val locationMap: String,
-	val isPublished: Boolean,
-	val userId: String
+	var id: String,
+	var title: String,
+	var content: String,
+	var locationName: String,
+	var locationMap: String,
+	var isPublished: Boolean,
+	var language: String,
+	var userId: String
 )

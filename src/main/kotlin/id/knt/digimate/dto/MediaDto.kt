@@ -10,6 +10,7 @@ data class MediaDto(
 		var youtubeUrl: String,
 		var fileUrl: String,
 		var isPublished: Boolean = false,
+		var language:String,
 		var userId: String,
 		var type: String
 )

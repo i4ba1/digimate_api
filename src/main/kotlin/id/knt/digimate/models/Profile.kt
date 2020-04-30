@@ -13,28 +13,28 @@ import javax.persistence.Lob
 @Table(name = "profile")
 data class Profile(
 
-				@Id
-				@GeneratedValue(generator = "UUID")
-				@GenericGenerator(
-								name = "UUID",
-								strategy = "org.hibernate.id.UUIDGenerator"
-				)
-				var id: UUID? = null,
+		@Id
+		@GeneratedValue(generator = "UUID")
+		@GenericGenerator(
+				name = "UUID",
+				strategy = "org.hibernate.id.UUIDGenerator"
+		)
+		var id: UUID? = null,
 
-				@Column(name = "province_name", columnDefinition = "varchar(100)", nullable = false)
-				var provinceName: String = "",
+		@Column(name = "province_name", columnDefinition = "varchar(100)", nullable = false)
+		var provinceName: String = "",
 
-				@Column(name = "address", columnDefinition = "varchar(150)", nullable = false)
-				var address: String = "",
+		@Column(name = "address", columnDefinition = "varchar(150)", nullable = false)
+		var address: String = "",
 
-				@Lob
-				var logo: ByteArray? = null,
+		@Lob
+		var logo: ByteArray? = null,
 
-				@Column(name = "language", columnDefinition = "char(3)", nullable = false)
-				var language: String = "",
+		@Column(name = "language", columnDefinition = "char(3)", nullable = false)
+		var language: String = "",
 
-				@Column(name = "logo_url", columnDefinition = "text", nullable = false)
-				var logoUrl: String = ""
+		@Column(name = "logo_url", columnDefinition = "text", nullable = false)
+		var logoUrl: String = ""
 ) {
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true

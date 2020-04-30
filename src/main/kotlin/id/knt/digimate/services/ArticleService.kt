@@ -29,6 +29,7 @@ class ArticleService (
 			newArticle.locationName = article.locationName
 			newArticle.locationMap = article.locationMap
 			newArticle.user = user
+			newArticle.language = article.language
 			newArticle = articleRepository.save(newArticle)
 			activityLogService.save(ActivityLogDto(user, null, newArticle, null,
 							"success insert new article " + newArticle.id, null))
@@ -65,6 +66,7 @@ class ArticleService (
 				currentArticle.isPublished = article.isPublished
 				currentArticle.locationName = article.locationName
 				currentArticle.locationMap = article.locationMap
+				currentArticle.language = article.language
 				currentArticle = articleRepository.saveAndFlush(currentArticle)
 			}
 			activityLogService.save(ActivityLogDto(user, null, currentArticle, null,

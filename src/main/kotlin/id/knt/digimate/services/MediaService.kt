@@ -47,6 +47,7 @@ class MediaService(
 				media.fileContent = newMedia.mediaFile!!.bytes
 				media.fileUrl = mediaUrl(newMedia)
 			}
+			media.language = newMedia.language
 			media.user = user
 			mediaRepository.save(media)
 
@@ -82,7 +83,7 @@ class MediaService(
 		if (media != null) {
 			return MediaDto(media.id.toString()
 					, media.description, media.description, null, media.youtubeUrl,
-					media.fileUrl, media.isPublished, "", media.type)
+					media.fileUrl, media.isPublished, "", media.type, media.language)
 		}
 		return null
 	}
@@ -91,7 +92,7 @@ class MediaService(
 		val userMediaList: MutableList<MediaDto> = mutableListOf()
 		mediaRepository.findMediaByUser(userId).forEach {
 			val mediaDto = MediaDto(it.id.toString(), it.description, it.description, null, it.youtubeUrl,
-					it.fileUrl, it.isPublished, "", it.type)
+					it.fileUrl, it.isPublished, "", it.type, it.language)
 			userMediaList.add(mediaDto)
 		}
 		return userMediaList
@@ -101,7 +102,7 @@ class MediaService(
 		val allMedia: MutableList<MediaDto> = mutableListOf()
 		mediaRepository.findAll(Sort.by("createdAt").descending()).forEach {
 			val mediaDto = MediaDto(it.id.toString(), it.description, it.description, null, it.youtubeUrl,
-					it.fileUrl, it.isPublished, "", it.type)
+					it.fileUrl, it.isPublished, "", it.type, it.language)
 			allMedia.add(mediaDto)
 		}
 		return allMedia
