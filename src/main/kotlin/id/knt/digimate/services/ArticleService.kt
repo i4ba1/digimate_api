@@ -53,8 +53,8 @@ class ArticleService (
 		return articleRepository.findAll(Sort.by("createdAt").descending())
 	}
 
-	override fun update(article: ArticleDto) {
-		val currentArticle = findArticleById(article.id)
+	override fun update(article: ArticleDto): Article? {
+		var currentArticle = findArticleById(article.id)
 		val user = userService.getUser(article.userId)
 
 		try {
@@ -65,7 +65,7 @@ class ArticleService (
 				currentArticle.isPublished = article.isPublished
 				currentArticle.locationName = article.locationName
 				currentArticle.locationMap = article.locationMap
-				articleRepository.saveAndFlush(currentArticle)
+				currentArticle = articleRepository.saveAndFlush(currentArticle)
 			}
 			activityLogService.save(ActivityLogDto(user, null, currentArticle, null,
 							"success update on article " + article.id, null))
@@ -73,10 +73,10 @@ class ArticleService (
 			activityLogService.save(ActivityLogDto(user, null, currentArticle, null,
 							"failed update on article " + article.id, e))
 		}
-
+		return currentArticle
 	}
 
-	override fun delete(articleDto: ArticleDto) {
+	override fun publishUnPublish(articleDto: ArticleDto) {
 		val user = userService.getUser(articleDto.userId)
 		var currentArticle: Article? = null
 

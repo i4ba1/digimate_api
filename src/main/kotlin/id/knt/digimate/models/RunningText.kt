@@ -43,6 +43,9 @@ data class RunningText (
 	
 	@Column(name = "is_published", columnDefinition = "boolean", nullable = false)
 	var isPublished:Boolean = false,
+
+	@Column(name = "language", columnDefinition = "char(3)", nullable = false)
+	var language: String = "",
 	
 	@ManyToOne()
 	@JoinColumn(name="user_id", nullable = false)

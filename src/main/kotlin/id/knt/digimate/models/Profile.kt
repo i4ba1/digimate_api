@@ -30,6 +30,9 @@ data class Profile(
 				@Lob
 				var logo: ByteArray? = null,
 
+				@Column(name = "language", columnDefinition = "char(3)", nullable = false)
+				var language: String = "",
+
 				@Column(name = "logo_url", columnDefinition = "text", nullable = false)
 				var logoUrl: String = ""
 ) {

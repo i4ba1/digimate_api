@@ -8,6 +8,6 @@ interface IArticleService {
 	fun findArticleById(id: String): Article?
 	fun findArticleByUserId(userId: String): List<Article>?
 	fun findAllArticle(): List<Article>?
-	fun update(article: ArticleDto)
-	fun delete(articleDto: ArticleDto)
+	fun update(article: ArticleDto): Article?
+	fun publishUnPublish(articleDto: ArticleDto)
 }
