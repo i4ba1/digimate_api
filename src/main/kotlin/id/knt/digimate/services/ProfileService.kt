@@ -4,6 +4,7 @@ import id.knt.digimate.dto.ProfileDto
 import id.knt.digimate.const.DIGIMATE_PROFILE
 import id.knt.digimate.dto.ActivityLogDto
 import id.knt.digimate.dto.FindProfileByIdDto
+import id.knt.digimate.dto.GetProfileDto
 import id.knt.digimate.interfaces.IProfileService
 import id.knt.digimate.models.Profile
 import id.knt.digimate.repository.IProfileRepository
@@ -15,6 +16,7 @@ import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
+import java.util.*
 
 
 @Service(value = "profileService")
@@ -62,6 +64,10 @@ class ProfileService(private val profileRepository:IProfileRepository,
 		findProfile.address = profile.address
 		findProfile.logoUrl = profile.logoUrl
 		return findProfile
+	}
+
+	override fun findProfile(): GetProfileDto? {
+		return profileRepository.getProfile()
 	}
 
 	override fun update(profileDto: ProfileDto): Profile? {

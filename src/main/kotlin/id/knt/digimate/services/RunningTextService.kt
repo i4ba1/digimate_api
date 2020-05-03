@@ -1,5 +1,6 @@
 package id.knt.digimate.services
 
+import id.knt.digimate.dto.ArticleDto
 import id.knt.digimate.dto.RunningTextDto
 import id.knt.digimate.interfaces.IRunningText
 import id.knt.digimate.models.RunningText
@@ -17,7 +18,7 @@ class RunningTextService(private val runningTextRepository: IRunningRepository, 
 		val currentUser: User? = userService.getUser(newRunningText.userId)
 		val createdDate = Date()
 		val runningText = RunningText(null, newRunningText.title, newRunningText.content, createdDate, null,
-						newRunningText.isPublished, currentUser)
+						newRunningText.isPublished, currentUser?.id.toString())
 		return runningTextRepository.save(runningText)
 	}
 
@@ -31,6 +32,20 @@ class RunningTextService(private val runningTextRepository: IRunningRepository, 
 
 	override fun findRunningTextByUserId(userId: String): List<RunningText>? {
 		return runningTextRepository.findRunningTextByUserId(userId)
+	}
+
+	override fun findRunningTextByUser(lang: String): MutableMap<String, List<RunningTextDto>>? {
+		val runningTexts = runningTextRepository.findMediaByUser(lang)
+		val runningTextList: MutableList<RunningTextDto> = mutableListOf()
+		val runningTextMap: MutableMap<String, List<RunningTextDto>> = mutableMapOf()
+
+		runningTexts?.forEach {
+			val runningTextDto = RunningTextDto(it.id.toString(), it.title, it.content, it.isPublished, it.user?.id.toString())
+			runningTextList.add(runningTextDto)
+		}
+
+		runningTextMap["runningText"] = runningTextList
+		return  runningTextMap
 	}
 
 	override fun findAllRunningText(): List<RunningText>? {

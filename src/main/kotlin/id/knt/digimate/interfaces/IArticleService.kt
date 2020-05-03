@@ -7,6 +7,7 @@ interface IArticleService {
 	fun save(article: ArticleDto): Article?
 	fun findArticleById(id: String): Article?
 	fun findArticleByUserId(userId: String): List<Article>?
+	fun findArticleByUser(lang: String): MutableMap<String, List<ArticleDto>>?
 	fun findAllArticle(): List<Article>?
 	fun update(article: ArticleDto): Article?
 	fun publishUnPublish(articleDto: ArticleDto)

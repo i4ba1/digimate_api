@@ -2,7 +2,8 @@ package id.knt.digimate.services
 
 import id.knt.digimate.const.DIGIMATE_MEDIA
 import id.knt.digimate.dto.ActivityLogDto
-import id.knt.digimate.dto.MediaDto
+import id.knt.digimate.dto.GetMediaDto
+import id.knt.digimate.dto.NewMediaDto
 import id.knt.digimate.interfaces.IMediaService
 import id.knt.digimate.models.Media
 import id.knt.digimate.repository.IMediaRepository
@@ -28,7 +29,7 @@ class MediaService(
 	private val userHome = System.getProperty("user.home")
 	private var error: Int = 0
 
-	override fun save(newMedia: MediaDto): Int {
+	override fun save(newMedia: NewMediaDto): Int {
 		val user = userService.getUser(newMedia.userId)
 		var media: Media? = null
 		try {
@@ -61,7 +62,7 @@ class MediaService(
 		}
 	}
 
-	private fun mediaUrl(newMedia: MediaDto): String {
+	private fun mediaUrl(newMedia: NewMediaDto): String {
 		val mediaFile = newMedia.mediaFile
 		val fileName = mediaFile!!.originalFilename?.let { StringUtils.cleanPath(it) }
 		val path = Paths.get(userHome + File.pathSeparator + DIGIMATE_MEDIA + File.pathSeparator + fileName)
@@ -78,37 +79,67 @@ class MediaService(
 		return ""
 	}
 
-	override fun findMediaById(id: String): MediaDto? {
+	override fun findMediaById(id: String): NewMediaDto? {
 		val media = mediaRepository.findByIdOrNull(id)
 		if (media != null) {
-			return MediaDto(media.id.toString()
+			return NewMediaDto(media.id.toString()
 					, media.description, media.description, null, media.youtubeUrl,
 					media.fileUrl, media.isPublished, "", media.type, media.language)
 		}
 		return null
 	}
 
-	override fun findMediaByUserId(userId: String): List<MediaDto>? {
-		val userMediaList: MutableList<MediaDto> = mutableListOf()
-		mediaRepository.findMediaByUser(userId).forEach {
-			val mediaDto = MediaDto(it.id.toString(), it.description, it.description, null, it.youtubeUrl,
+	override fun findMediaByUserId(userId: String): List<NewMediaDto>? {
+		val userMediaList: MutableList<NewMediaDto> = mutableListOf()
+		mediaRepository.findMediaByUserId(userId).forEach {
+			val mediaDto = NewMediaDto(it.id.toString(), it.description, it.description, null, it.youtubeUrl,
 					it.fileUrl, it.isPublished, "", it.type, it.language)
 			userMediaList.add(mediaDto)
 		}
 		return userMediaList
 	}
 
-	override fun findAllMedia(): List<MediaDto>? {
-		val allMedia: MutableList<MediaDto> = mutableListOf()
+	override fun findMediaImageByUser(lang: String): MutableMap<String, List<GetMediaDto>>? {
+		val media = mediaRepository.getImageByUser(lang)
+		val mediaList: MutableList<GetMediaDto> = mutableListOf()
+		val mediaMap: MutableMap<String, List<GetMediaDto>> = mutableMapOf()
+
+		media?.forEach {
+			val mediaDto = GetMediaDto(it.id, it.title, it.description, "",
+					it.fileUrl, it.isPublished, it.language, it.userId, it.type)
+			mediaList.add(mediaDto)
+		}
+
+		mediaMap["media"] = mediaList
+		return  mediaMap
+	}
+
+	override fun findMediaVideoByUser(lang: String): MutableMap<String, List<GetMediaDto>>? {
+		val media = mediaRepository.getVideoByUser(lang)
+		val mediaList: MutableList<GetMediaDto> = mutableListOf()
+		val mediaMap: MutableMap<String, List<GetMediaDto>> = mutableMapOf()
+
+		media?.forEach {
+			val mediaDto = GetMediaDto(it.id, it.title, it.description, it.youtubeUrl,
+					it.fileUrl, it.isPublished, it.language, it.userId, it.type)
+			mediaList.add(mediaDto)
+		}
+
+		mediaMap["media"] = mediaList
+		return  mediaMap
+	}
+
+	override fun findAllMedia(): List<NewMediaDto>? {
+		val allMedia: MutableList<NewMediaDto> = mutableListOf()
 		mediaRepository.findAll(Sort.by("createdAt").descending()).forEach {
-			val mediaDto = MediaDto(it.id.toString(), it.description, it.description, null, it.youtubeUrl,
+			val mediaDto = NewMediaDto(it.id.toString(), it.description, it.description, null, it.youtubeUrl,
 					it.fileUrl, it.isPublished, "", it.type, it.language)
 			allMedia.add(mediaDto)
 		}
 		return allMedia
 	}
 
-	override fun update(currentMedia: MediaDto): Int {
+	override fun update(currentMedia: NewMediaDto): Int {
 		val media = mediaRepository.findByIdOrNull(currentMedia.id)
 		val user = userService.getUser(currentMedia.userId)
 		try {
@@ -139,7 +170,7 @@ class MediaService(
 		return -2
 	}
 
-	override fun publish(mediaDto: MediaDto): Int {
+	override fun publish(mediaDto: NewMediaDto): Int {
 		val currentMedia = mediaRepository.findByIdOrNull(mediaDto.id)
 		if (currentMedia != null) {
 			currentMedia.isPublished = false

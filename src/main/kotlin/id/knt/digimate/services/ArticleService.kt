@@ -50,6 +50,24 @@ class ArticleService (
 		return articleRepository.findArticleByUserId(userId)
 	}
 
+	override fun findArticleByUser(lang: String): MutableMap<String, List<ArticleDto>>? {
+		val articles = articleRepository.findArticleByUser(lang)
+		if (articles != null) {
+			val articleList: MutableList<ArticleDto> = mutableListOf()
+			val articleMap: MutableMap<String, List<ArticleDto>> = mutableMapOf()
+
+			articles?.forEach {
+				val articleDto = ArticleDto(it.id.toString(), it.title, it.content, it.locationName, it.locationMap,
+						it.isPublished, it.language, it.user?.id.toString())
+				articleList.add(articleDto)
+			}
+
+			articleMap["article"] = articleList
+			return  articleMap
+		}
+		return null
+	}
+
 	override fun findAllArticle(): List<Article>? {
 		return articleRepository.findAll(Sort.by("createdAt").descending())
 	}

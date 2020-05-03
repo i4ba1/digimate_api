@@ -9,5 +9,8 @@ import org.springframework.data.jpa.repository.Query
 @Repository(value = "articleRepository") interface IArticleRepository : JpaRepository<Article, String> {
 	
 	@Query("select a from Article a where a.user.id = ?1")
-	fun findArticleByUserId(userId: String): List<Article>;
+	fun findArticleByUserId(userId: String): List<Article>?
+
+	@Query(value = "select a from Article a join fetch a.user where a.language = ?1 and a.isPublished = true")
+	fun findArticleByUser(lang: String): List<Article>?
 }

@@ -1,8 +1,9 @@
 package id.knt.digimate.dto
 
 data class PlayerDto(
-	var articleDto: ArticleDto,
-	var mediaDto: MediaDto,
-	var runningTextDto: RunningTextDto,
-	var profileDto: ProfileDto
+	var articleDto: MutableMap<String, List<ArticleDto>>?,
+	var image: MutableMap<String, List<GetMediaDto>>?,
+	var video: MutableMap<String, List<GetMediaDto>>?,
+	var runningTextDto: MutableMap<String, List<RunningTextDto>>?,
+	var profileDto: MutableMap<String, GetProfileDto>?
 )
