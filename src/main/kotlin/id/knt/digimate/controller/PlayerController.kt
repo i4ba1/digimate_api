@@ -34,7 +34,7 @@ class PlayerController(
 		profileMap["profile"] = profile
 
 		val playerDto = PlayerDto(articleMap, mediaImageMap, mediaVideoMap, runningTextMap, profileMap)
-		return ResponseEntity(HttpStatus.OK)
+		return ResponseEntity(playerDto, HttpStatus.OK)
 	}
 
 	fun getWeatherForecast(){

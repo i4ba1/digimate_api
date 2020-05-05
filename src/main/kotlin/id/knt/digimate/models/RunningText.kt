@@ -1,16 +1,8 @@
 package id.knt.digimate.models
 
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.JoinColumn
-import javax.persistence.ManyToOne
-import javax.persistence.Table
-import javax.persistence.Temporal
-import javax.persistence.TemporalType
 import org.hibernate.annotations.GenericGenerator
 import java.util.*
+import javax.persistence.*
 
 /**
  * @author nizar
@@ -47,8 +39,7 @@ data class RunningText (
 	@Column(name = "language", columnDefinition = "char(3)", nullable = false)
 	var language: String = "",
 	
-	@ManyToOne()
-	@JoinColumn(name="user_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
 	var user: User? =null
 
 )

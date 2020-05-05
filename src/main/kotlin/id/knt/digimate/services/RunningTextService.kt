@@ -10,7 +10,7 @@ import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import java.util.*
 
-@Service(value = "runningTextService")
+@Service
 class RunningTextService(private val runningTextRepository: IRunningRepository, private val userService: UserService) :
 				IRunningText {
 

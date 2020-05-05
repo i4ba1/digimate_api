@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 import java.util.Date
 
 
-@Service("articleService")
+@Service
 class ArticleService (
 				private val userService: UserService,
 				private val articleRepository: IArticleRepository,
@@ -56,7 +56,7 @@ class ArticleService (
 			val articleList: MutableList<ArticleDto> = mutableListOf()
 			val articleMap: MutableMap<String, List<ArticleDto>> = mutableMapOf()
 
-			articles?.forEach {
+			articles.forEach {
 				val articleDto = ArticleDto(it.id.toString(), it.title, it.content, it.locationName, it.locationMap,
 						it.isPublished, it.language, it.user?.id.toString())
 				articleList.add(articleDto)

@@ -19,11 +19,11 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 import java.util.*
-import kotlin.math.sign
+
 
 
 @Slf4j
-@Service(value = "userService")
+@Service
 class UserService private constructor(
 				private val userRepository: IUserRepository,
 				private val activityLogService: ActivityLogService) : IUserService {

@@ -19,7 +19,7 @@ import java.nio.file.StandardCopyOption
 import java.util.*
 
 
-@Service(value = "mediaService")
+@Service
 class MediaService(
 		private val mediaRepository: IMediaRepository,
 		private val userService: UserService,

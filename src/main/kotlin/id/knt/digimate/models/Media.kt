@@ -1,19 +1,8 @@
 package id.knt.digimate.models
 
-import javax.persistence.Entity
-import javax.persistence.Table
-import javax.persistence.Id
-import javax.persistence.GeneratedValue
 import org.hibernate.annotations.GenericGenerator
-import java.sql.Timestamp
-import java.time.LocalDateTime
 import java.util.*
-import javax.persistence.Column
-import javax.persistence.Lob
-import javax.persistence.TemporalType
-import javax.persistence.Temporal
-import javax.persistence.ManyToOne
-import javax.persistence.JoinColumn
+import javax.persistence.*
 
 @Entity(name = "Media")
 @Table(name = "media")
@@ -66,8 +55,7 @@ data class Media(
 		@Column(name = "language", columnDefinition = "char(3)", nullable = false)
 		var language: String = "",
 
-		@ManyToOne
-		@JoinColumn(name = "user_id", nullable = false)
+		@ManyToOne(fetch = FetchType.LAZY)
 		var user: User? = null
 ) {
 	override fun equals(other: Any?): Boolean {

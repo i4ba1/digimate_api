@@ -8,7 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.stereotype.Repository
 
-@Repository(value = "profileRepository") interface IProfileRepository : JpaRepository<Profile, String> {
+@Repository
+interface IProfileRepository : JpaRepository<Profile, String> {
 
 	@Query("select p.id, p.title, p.description, p.provinceName, p.address, p.logoUrl from Profile p")
 	fun getProfile(): GetProfileDto

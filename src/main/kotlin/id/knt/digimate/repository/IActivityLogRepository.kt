@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import id.knt.digimate.models.ActivityLog
 import org.springframework.stereotype.Repository
 
-@Repository(value = "activityLogRepository") interface IActivityLogRepository : JpaRepository<ActivityLog, String> {
+@Repository
+interface IActivityLogRepository : JpaRepository<ActivityLog, String> {
 	
 }

@@ -69,13 +69,19 @@ data class User(
 		@Column(name = "is_active", columnDefinition = "boolean", nullable = false)
 		var isActive: Boolean = true,
 
-		@OneToMany(mappedBy = "user")
+		@OneToMany(mappedBy = "user",
+			cascade = [CascadeType.ALL],
+			orphanRemoval = true, fetch = FetchType.LAZY)
 		var articles: Set<Article?> = setOf(null),
 
-		@OneToMany(mappedBy = "user")
+		@OneToMany(mappedBy = "user",
+				cascade = [CascadeType.ALL],
+				orphanRemoval = true, fetch = FetchType.LAZY)
 		var media: Set<Media?> = setOf(null),
 
-		@OneToMany(mappedBy = "user")
+		@OneToMany(mappedBy = "user",
+				cascade = [CascadeType.ALL],
+				orphanRemoval = true, fetch = FetchType.LAZY)
 		var runningText: Set<RunningText?> = setOf(null)
 ) {
 	override fun equals(other: Any?): Boolean {

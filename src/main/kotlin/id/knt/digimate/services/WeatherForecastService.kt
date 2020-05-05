@@ -10,9 +10,9 @@ import java.net.URL
 import java.util.*
 import javax.xml.parsers.DocumentBuilderFactory
 
-@Service("weatherForecastService")
+@Service
 class WeatherForecastService : IWeatherService {
-	override fun getCurrentWeather(): WeatherDto? {
+	override fun getCurrentWeather(domainName: String): WeatherDto? {
 
 		// fake end point that returns XML response
 		try {

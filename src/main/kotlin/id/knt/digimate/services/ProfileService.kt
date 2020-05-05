@@ -19,7 +19,7 @@ import java.nio.file.StandardCopyOption
 import java.util.*
 
 
-@Service(value = "profileService")
+@Service
 class ProfileService(private val profileRepository:IProfileRepository,
 				private val activityLogService: ActivityLogService,
 				private val userService: UserService) : IProfileService {

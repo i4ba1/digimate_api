@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository
 import org.springframework.data.jpa.repository.Query
 
 
-@Repository(value = "articleRepository") interface IArticleRepository : JpaRepository<Article, String> {
+@Repository
+interface IArticleRepository : JpaRepository<Article, String> {
 	
 	@Query("select a from Article a where a.user.id = ?1")
 	fun findArticleByUserId(userId: String): List<Article>?

@@ -7,7 +7,7 @@ import id.knt.digimate.repository.IActivityLogRepository
 import org.springframework.stereotype.Service
 import java.util.*
 
-@Service(value = "activityLogService")
+@Service
 class ActivityLogService(private val activityLogRepository: IActivityLogRepository) : ILogActivityService {
 
 	override fun save(activityLog: ActivityLogDto) {

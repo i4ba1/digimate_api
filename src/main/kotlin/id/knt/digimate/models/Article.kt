@@ -1,19 +1,11 @@
 package id.knt.digimate.models
 
-import javax.persistence.Id
-import javax.persistence.GeneratedValue
 import org.hibernate.annotations.GenericGenerator
-import javax.persistence.Column
-import javax.persistence.Temporal
-import javax.persistence.TemporalType
 import java.time.LocalDateTime
-import javax.persistence.ManyToOne
-import javax.persistence.JoinColumn
 import id.knt.digimate.models.User
 import java.sql.Timestamp
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity(name = "Article")
 @Table(name = "article")
@@ -52,7 +44,6 @@ data class Article (
 	@Column(name = "language", columnDefinition = "char(3)", nullable = false)
 	var language: String = "",
 
-	@ManyToOne()
-	@JoinColumn(name="user_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
 	var user: User? = null
 )
