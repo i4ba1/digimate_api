@@ -9,7 +9,6 @@ import org.w3c.dom.Node
 import java.net.URL
 import java.util.*
 import javax.xml.parsers.DocumentBuilderFactory
-import kotlin.collections.ArrayList
 
 @Service("weatherForecastService")
 class WeatherForecastService : IWeatherService {
@@ -163,7 +162,7 @@ class WeatherForecastService : IWeatherService {
 								}
 							}
 
-							break;
+							break
 						}
 					}
 
