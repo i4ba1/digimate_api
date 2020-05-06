@@ -3,6 +3,7 @@ package id.knt.digimate.controller
 import id.knt.digimate.dto.ArticleDto
 import id.knt.digimate.models.Article
 import id.knt.digimate.services.ArticleService
+import org.springframework.data.domain.Page
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -36,9 +37,13 @@ class ArticleController(private val articleService: ArticleService) {
 		} else ResponseEntity(HttpStatus.NOT_FOUND)
 	}
 
-	@GetMapping(path = ["/getAllArticle"])
-	private fun getAllArticle(): ResponseEntity<List<Article>>? {
-		return responseForListAllArticleAndUserArticle(articleService.findAllArticle())
+	@GetMapping(path = ["/getAllArticle/{pageNo}"])
+	private fun getAllArticle(@PathVariable pageNo: Int): ResponseEntity<Page<Article>>? {
+		val articlePage = articleService.findAllArticle(pageNo)
+		if (articlePage != null) {
+			return ResponseEntity(articlePage, HttpStatus.OK)
+		}
+		return ResponseEntity(HttpStatus.NOT_FOUND)
 	}
 
 	@GetMapping(path = ["/getArticleByUserId/{id}"])

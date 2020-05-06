@@ -3,6 +3,7 @@ package id.knt.digimate.controller
 import id.knt.digimate.dto.RunningTextDto
 import id.knt.digimate.models.RunningText
 import id.knt.digimate.services.RunningTextService
+import org.springframework.data.domain.Page
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -30,9 +31,9 @@ class RunningTextController(private val runningTextService: RunningTextService) 
 		return ResponseEntity(isPublish, HttpStatus.OK)
 	}
 
-	@GetMapping(path = ["/getAllRunningText"])
-	fun getAllRunningText(): ResponseEntity<List<RunningText>>? {
-		val runningTexts = runningTextService.findAllRunningText()
+	@GetMapping(path = ["/getAllRunningText/{page}"])
+	fun getAllRunningText(@PathVariable("page") page:Int): ResponseEntity<Page<RunningText>>? {
+		val runningTexts = runningTextService.findAllRunningText(page)
 		return if (runningTexts != null) {
 			ResponseEntity(runningTexts, HttpStatus.OK)
 		} else ResponseEntity(HttpStatus.NOT_FOUND)

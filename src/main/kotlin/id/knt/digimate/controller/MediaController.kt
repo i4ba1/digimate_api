@@ -2,6 +2,7 @@ package id.knt.digimate.controller
 
 import id.knt.digimate.dto.NewMediaDto
 import id.knt.digimate.services.MediaService
+import org.springframework.data.domain.Page
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -43,10 +44,13 @@ class MediaController(private val mediaService: MediaService) {
 		return responseForListAllMediaAndUserMedia(userMediaList)
 	}
 
-	@GetMapping(path = ["/getAllMedia"])
-	fun getAllMedia(): ResponseEntity<List<NewMediaDto>>? {
-		val allMedia: List<NewMediaDto>? = mediaService.findAllMedia()
-		return responseForListAllMediaAndUserMedia(allMedia)
+	@GetMapping(path = ["/getAllMedia/{pageNo}"])
+	fun getAllMedia(@PathVariable("pageNo") pageNo:Int): ResponseEntity<Page<NewMediaDto>>? {
+		val pageMedia: Page<NewMediaDto>? = mediaService.findAllMedia(pageNo)
+		if (pageMedia != null) {
+			return ResponseEntity(pageMedia, HttpStatus.OK)
+		}
+		return ResponseEntity(HttpStatus.NOT_FOUND)
 	}
 
 	private fun responseForListAllMediaAndUserMedia(userMediaList: List<NewMediaDto>?): ResponseEntity<List<NewMediaDto>>? {

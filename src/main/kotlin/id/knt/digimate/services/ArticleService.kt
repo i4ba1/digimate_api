@@ -5,9 +5,11 @@ import id.knt.digimate.dto.ArticleDto
 import id.knt.digimate.interfaces.IArticleService
 import id.knt.digimate.models.Article
 import id.knt.digimate.repository.IArticleRepository
-import org.springframework.data.domain.Sort
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
-import java.util.Date
+import java.util.*
 
 
 @Service
@@ -68,8 +70,10 @@ class ArticleService (
 		return null
 	}
 
-	override fun findAllArticle(): List<Article>? {
-		return articleRepository.findAll(Sort.by("createdAt").descending())
+	override fun findAllArticle(pageNo: Int): Page<Article>? {
+		val noOfRecords:Int = 20
+		val pageable: Pageable = PageRequest.of(pageNo, noOfRecords)
+		return articleRepository.findAll(pageable)
 	}
 
 	override fun update(article: ArticleDto): Article? {

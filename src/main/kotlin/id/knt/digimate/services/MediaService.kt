@@ -7,7 +7,10 @@ import id.knt.digimate.dto.NewMediaDto
 import id.knt.digimate.interfaces.IMediaService
 import id.knt.digimate.models.Media
 import id.knt.digimate.repository.IMediaRepository
-import org.springframework.data.domain.Sort
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageImpl
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.util.StringUtils
@@ -129,14 +132,17 @@ class MediaService(
 		return  mediaMap
 	}
 
-	override fun findAllMedia(): List<NewMediaDto>? {
+	override fun findAllMedia(pageNo:Int): Page<NewMediaDto>? {
+		val noOfRecords:Int = 20
+		val pageable: Pageable = PageRequest.of(pageNo, noOfRecords)
 		val allMedia: MutableList<NewMediaDto> = mutableListOf()
-		mediaRepository.findAll(Sort.by("createdAt").descending()).forEach {
+		mediaRepository.getAllMedia(pageable).forEach {
 			val mediaDto = NewMediaDto(it.id.toString(), it.description, it.description, null, it.youtubeUrl,
 					it.fileUrl, it.isPublished, "", it.type, it.language)
 			allMedia.add(mediaDto)
 		}
-		return allMedia
+
+		return PageImpl(allMedia, pageable, allMedia.size.toLong())
 	}
 
 	override fun update(currentMedia: NewMediaDto): Int {

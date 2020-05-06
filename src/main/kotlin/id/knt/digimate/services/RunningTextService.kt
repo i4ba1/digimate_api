@@ -1,12 +1,13 @@
 package id.knt.digimate.services
 
-import id.knt.digimate.dto.ArticleDto
 import id.knt.digimate.dto.RunningTextDto
 import id.knt.digimate.interfaces.IRunningText
 import id.knt.digimate.models.RunningText
 import id.knt.digimate.models.User
 import id.knt.digimate.repository.IRunningRepository
-import org.springframework.data.domain.Sort
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -48,8 +49,10 @@ class RunningTextService(private val runningTextRepository: IRunningRepository, 
 		return  runningTextMap
 	}
 
-	override fun findAllRunningText(): List<RunningText>? {
-		return runningTextRepository.findAll(Sort.by("createdAt").descending())
+	override fun findAllRunningText(pageNo: Int): Page<RunningText>? {
+		val noOfRecords:Int = 20
+		val pageable:Pageable  = PageRequest.of(pageNo, noOfRecords)
+		return runningTextRepository.findAll(pageable)
 	}
 
 	override fun update(runningText: RunningTextDto): RunningText? {
