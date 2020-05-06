@@ -11,7 +11,7 @@
     </parent>
     <groupId>id.knt</groupId>
     <artifactId>digimate</artifactId>
-    <version>0.0.1-dev</version>
+    <version>dev-1.0.0</version>
     <name>digimate</name>
     <description>DIGIMATE</description>
 
