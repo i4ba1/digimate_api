@@ -12,7 +12,7 @@ class UserController(private val userService: UserService) {
 
 	@PostMapping("/createNewUser")
 	fun createNewUser(@RequestBody userDto: UserDto): ResponseEntity<Void>{
-		val error = userService.save(userDto)
+		val error = userService.addUser(userDto)
 		return saveOrUpdateResponse(error)
 	}
 

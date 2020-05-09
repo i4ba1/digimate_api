@@ -29,7 +29,7 @@ class UserService private constructor(
 				private val activityLogService: ActivityLogService) : IUserService {
 	private var userHome = System.getProperty("user.home")
 
-	override fun save(newUser: UserDto): Int {
+	override fun addUser(newUser: UserDto): Int {
 			var user: User? = null
 			try {
 				user = User()
