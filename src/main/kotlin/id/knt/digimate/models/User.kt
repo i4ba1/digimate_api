@@ -1,8 +1,8 @@
 package id.knt.digimate.models
 
 import org.hibernate.annotations.GenericGenerator
-import javax.persistence.*
 import java.util.*
+import javax.persistence.*
 
 
 @Entity
@@ -72,17 +72,22 @@ data class User(
 		@OneToMany(mappedBy = "user",
 			cascade = [CascadeType.ALL],
 			orphanRemoval = true, fetch = FetchType.LAZY)
-		var articles: Set<Article?> = setOf(null),
+		var articles: Set<Article?> = mutableSetOf(null),
 
 		@OneToMany(mappedBy = "user",
 				cascade = [CascadeType.ALL],
 				orphanRemoval = true, fetch = FetchType.LAZY)
-		var media: Set<Media?> = setOf(null),
+		var media: Set<Media?> = mutableSetOf(null),
 
 		@OneToMany(mappedBy = "user",
 				cascade = [CascadeType.ALL],
 				orphanRemoval = true, fetch = FetchType.LAZY)
-		var runningText: Set<RunningText?> = setOf(null)
+		var runningText: Set<RunningText?> = mutableSetOf(null),
+
+		@OneToMany(mappedBy = "user",
+				cascade = [CascadeType.ALL],
+				orphanRemoval = true, fetch = FetchType.LAZY)
+		var roles: Set<Role?> = mutableSetOf(null)
 ) {
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
